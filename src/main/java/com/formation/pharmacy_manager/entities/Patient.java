@@ -13,8 +13,6 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Patient extends User {
-    @NotBlank
+
     private int age;
-    @NotBlank
-    private String prescription;
 }

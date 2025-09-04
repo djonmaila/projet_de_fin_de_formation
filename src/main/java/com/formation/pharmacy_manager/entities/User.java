@@ -36,10 +36,8 @@ public abstract class User {
     @NotBlank
     private String password;
 
-    @NotBlank
     private LocalDate creation_date;
 
-    @NotBlank
     private LocalDate update_date;
 
     @ManyToMany
