@@ -1,0 +1,34 @@
+package com.formation.pharmacy_manager.entities;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+public class DistributorDrug {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long distributorDrugId;
+
+    @NotBlank
+    private LocalDate creation_date;
+
+    @NotBlank
+    private LocalDate update_date;
+    @ManyToOne
+    @JoinColumn(name = "id_drug")
+    private Drug drug;
+
+    @ManyToOne
+    @JoinColumn(name = "id_distributor")
+    private Distributor distributor;
+}
