@@ -50,4 +50,7 @@ public abstract class User {
 
     @OneToMany(mappedBy = "user")
     private List<Command> commandList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Request> requestList = new ArrayList<>();
 }

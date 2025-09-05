@@ -7,6 +7,8 @@ import com.formation.pharmacy_manager.repository.PatientRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class PatientServiceImpl implements PatientService{
@@ -22,5 +24,43 @@ public class PatientServiceImpl implements PatientService{
                 saved.getPhoneNumber(),
                 saved.getEmail()
         );
+    }
+
+    @Override
+    public List<PatientResponseDto> getAllPatient() {
+        return patientRepository.findAll().stream().map(
+                patient -> new PatientResponseDto(
+                        patient.getUserId(),
+                        patient.getUserName(),
+                        patient.getPhoneNumber(),
+                        patient.getEmail()
+                )).toList();
+    }
+
+    @Override
+    public PatientResponseDto getPatientById(long id) {
+        Patient patient = patientRepository.findById(id).get();
+        if (patient == null) throw new RuntimeException("user avec l'id : "+id+" introuvable");
+        return new PatientResponseDto(
+                patient.getUserId(),
+                patient.getUserName(),
+                patient.getPhoneNumber(),
+                patient.getEmail()
+        );
+    }
+
+    @Override
+    public String deleteById(long id) {
+        if (existById(id)){
+            patientRepository.deleteById(id);
+            return "patient supprimer avec succès";
+        }else{
+            return "suppression échoué";
+        }
+    }
+
+    @Override
+    public boolean existById(long id) {
+        return patientRepository.existsById(id);
     }
 }
