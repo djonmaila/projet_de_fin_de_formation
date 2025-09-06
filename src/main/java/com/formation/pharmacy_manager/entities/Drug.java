@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,17 +28,14 @@ public class Drug {
     @NotBlank
     private String drugDescription;
 
-    @NotBlank
     private LocalDate peremption;
 
-    @NotBlank
     private double price;
 
-    @NotBlank
-    private LocalDate creation_date;
 
-    @NotBlank
-    private LocalDate update_date;
+    private Date creation_date;
+
+    private Date update_date;
 
     @ManyToOne
     @JoinColumn(name = "id_category")

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,12 +19,9 @@ public class DistributorDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long distributorDrugId;
-
-    @NotBlank
-    private LocalDate creation_date;
-
-    @NotBlank
-    private LocalDate update_date;
+    private int qte;
+    private Date creation_date;
+    private Date update_date;
     @ManyToOne
     @JoinColumn(name = "id_drug")
     private Drug drug;

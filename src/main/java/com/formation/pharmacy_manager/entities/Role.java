@@ -22,6 +22,7 @@ public class Role {
     private long roleId;
 
     @NotBlank
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     @ManyToMany(mappedBy = "roles")

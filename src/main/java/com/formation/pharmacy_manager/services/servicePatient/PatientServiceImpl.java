@@ -22,7 +22,8 @@ public class PatientServiceImpl implements PatientService{
                 saved.getUserId(),
                 saved.getUserName(),
                 saved.getPhoneNumber(),
-                saved.getEmail()
+                saved.getEmail(),
+                saved.getAge()
         );
     }
 
@@ -33,7 +34,8 @@ public class PatientServiceImpl implements PatientService{
                         patient.getUserId(),
                         patient.getUserName(),
                         patient.getPhoneNumber(),
-                        patient.getEmail()
+                        patient.getEmail(),
+                        patient.getAge()
                 )).toList();
     }
 
@@ -45,7 +47,8 @@ public class PatientServiceImpl implements PatientService{
                 patient.getUserId(),
                 patient.getUserName(),
                 patient.getPhoneNumber(),
-                patient.getEmail()
+                patient.getEmail(),
+                patient.getAge()
         );
     }
 

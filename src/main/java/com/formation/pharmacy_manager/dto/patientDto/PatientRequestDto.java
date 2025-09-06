@@ -12,6 +12,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @AllArgsConstructor
@@ -45,7 +46,7 @@ public class PatientRequestDto {
         patient.setAge(requestDto.getAge());
         patient.setPhoneNumber(requestDto.getPhoneNumber());
         patient.setCreation_date(LocalDate.now());
-        patient.setUpdate_date(LocalDate.now());
+        patient.setUpdate_date(new Date());
 
         return patient;
     }

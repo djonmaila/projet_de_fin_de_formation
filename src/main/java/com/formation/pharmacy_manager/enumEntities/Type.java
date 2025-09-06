@@ -5,5 +5,6 @@ public enum Type {
     USER,
     PHARMACIST,
     PATIENT,
-    RECEPTIONIST
+    RECEPTIONIST,
+    DISTRIBUTOR
 }

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,7 +23,10 @@ public class Command {
     private long commandId;
 
     @NotNull
-    private LocalDate creation_date;
+    private String pseudo;
+
+    @NotNull
+    private Date creation_date;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
