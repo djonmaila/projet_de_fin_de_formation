@@ -27,10 +27,8 @@ public class Category {
     @NotBlank
     private String categoryName;
 
-    @NotBlank
     private LocalDate creation_date;
 
-    @NotBlank
     private LocalDate update_date;
 
     @OneToMany(mappedBy = "category")

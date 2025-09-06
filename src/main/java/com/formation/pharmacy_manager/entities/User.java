@@ -10,6 +10,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -38,7 +39,7 @@ public abstract class User {
 
     private LocalDate creation_date;
 
-    private LocalDate update_date;
+    private Date update_date;
 
     @ManyToMany
     @JoinTable(
