@@ -21,13 +21,10 @@ public class CommandDrug {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commandDrugId;
 
-    @NotBlank
     private int quantity;
 
-    @NotNull
     private LocalDate date;
 
-    @NotNull
     private LocalTime time;
     @ManyToOne
     @JoinColumn(name = "id_command")
