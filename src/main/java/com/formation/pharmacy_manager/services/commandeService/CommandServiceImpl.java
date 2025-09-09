@@ -49,4 +49,33 @@ public class CommandServiceImpl implements CommandService{
                         dg.getUpdate_date()
                 )).toList();
     }
+
+    public String deleteById(long id){
+        if (commandRepository.existsById(id)){
+            commandRepository.deleteById(id);
+            return "command was deleting successfully";
+        }
+        return "impossible to delete this command because the command wasn't found";
+    }
+
+    public boolean existById(long id){
+        return commandRepository.existsById(id);
+    }
+
+    public CommandeResponseDto updateCommande(long id,CommandeRequestDto dto) {
+        Command command =commandRepository.findById(id).orElse(null);
+        if (command == null) throw new RuntimeException("impossible to update this command");
+        command.setPseudo(dto.getPseudo());
+        User user = userRepository.findDistinctByUserName(dto.getUserName());
+        command.setUser(user);
+        command.setCreation_date(new Date());
+
+        Command cmd = commandRepository.save(command);
+        return new CommandeResponseDto(
+                cmd.getCommandId(),
+                cmd.getPseudo(),
+                cmd.getUser().getUserName(),
+                cmd.getCreation_date()
+        );
+    }
 }

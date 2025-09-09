@@ -8,7 +8,9 @@ public record CommandeDrugResponseDto(
          String pseudo,
          String drugName,
          int quantity,
+         double prixUnitaire,
          LocalDate date,
-         LocalTime time
+         LocalTime time,
+         String userDis
 ) {
 }
