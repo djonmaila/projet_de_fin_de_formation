@@ -2,6 +2,7 @@ package com.formation.pharmacy_manager.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class DistributorDrug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long distributorDrugId;
+    @PositiveOrZero
     private int qte;
     private Date creation_date;
     private Date update_date;

@@ -5,12 +5,12 @@ import lombok.Getter;
 
 @Getter
 public class CommandeRequestDto {
-    private String index;
+    private String pseudo;
     private String userName;
 
     public Command toCommandEntity(CommandeRequestDto dto){
         Command command = new Command();
-        command.setPseudo(dto.index);
+        command.setPseudo(dto.pseudo);
 
         return command;
     }

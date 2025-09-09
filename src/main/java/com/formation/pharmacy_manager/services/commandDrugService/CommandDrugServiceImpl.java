@@ -32,6 +32,7 @@ public class CommandDrugServiceImpl implements CommandDrugService{
 
 
         DistributorDrug dis =drug.getDistributorDrugList().stream().filter(fil->fil.getQte()> dto.getQuantity()).findAny().get();
+        if (dis == null) throw new RuntimeException("stock insuffisant");
         dis.setQte(dis.getQte()-dto.getQuantity());
         dis.setUpdate_date(new Date());
         String userName = dis.getDistributor().getUserName();
@@ -44,6 +45,7 @@ public class CommandDrugServiceImpl implements CommandDrugService{
         cmdDrug.setTime(LocalTime.now());
         cmdDrug.setDate(LocalDate.now());
         cmdDrug.setQuantity(dto.getQuantity());
+        cmdDrug.setUserDis(userName);
         CommandDrug cmd = commandeDrugRepository.save(cmdDrug);
 
         return new CommandeDrugResponseDto(
@@ -51,8 +53,10 @@ public class CommandDrugServiceImpl implements CommandDrugService{
                 cmd.getCommand().getPseudo(),
                 cmd.getDrug().getDrugName(),
                 cmd.getQuantity(),
+                cmd.getDrug().getPrice(),
                 cmd.getDate(),
-                cmd.getTime()
+                cmd.getTime(),
+                cmd.getUserDis()
         );
     }
 
@@ -64,8 +68,10 @@ public class CommandDrugServiceImpl implements CommandDrugService{
                         cmd.getCommand().getPseudo(),
                         cmd.getDrug().getDrugName(),
                         cmd.getQuantity(),
+                        cmd.getDrug().getPrice(),
                         cmd.getDate(),
-                        cmd.getTime()
+                        cmd.getTime(),
+                        cmd.getUserDis()
                 )).toList();
     }
 
@@ -77,8 +83,10 @@ public class CommandDrugServiceImpl implements CommandDrugService{
                 cmd.getCommand().getPseudo(),
                 cmd.getDrug().getDrugName(),
                 cmd.getQuantity(),
+                cmd.getDrug().getPrice(),
                 cmd.getDate(),
-                cmd.getTime()
+                cmd.getTime(),
+                        cmd.getUserDis()
         )).orElse(null);
     }
 }
