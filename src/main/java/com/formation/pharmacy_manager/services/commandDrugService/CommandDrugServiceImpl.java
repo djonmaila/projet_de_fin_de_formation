@@ -34,7 +34,7 @@ public class CommandDrugServiceImpl implements CommandDrugService{
         DistributorDrug dis =drug.getDistributorDrugList().stream().filter(fil->fil.getQte()> dto.getQuantity()).findAny().get();
         dis.setQte(dis.getQte()-dto.getQuantity());
         dis.setUpdate_date(new Date());
-        String userName = dis.getDistributor().getUserName();
+        // String userName = dis.getDistributor().getUserName();
         distributorDrugRepository.save(dis);
 
 

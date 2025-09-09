@@ -1,7 +1,7 @@
 package com.formation.pharmacy_manager.dto.distributorDto;
 
 import com.formation.pharmacy_manager.entities.Distributor;
-import com.formation.pharmacy_manager.entities.Role;
+// import com.formation.pharmacy_manager.entities.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

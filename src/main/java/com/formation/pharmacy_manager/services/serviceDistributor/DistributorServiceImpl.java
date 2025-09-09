@@ -1,12 +1,12 @@
 package com.formation.pharmacy_manager.services.serviceDistributor;
 
-import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
+// import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.dto.distributorDto.DistributorRequestDto;
 import com.formation.pharmacy_manager.dto.distributorDto.DistributorResponseDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.entities.Distributor;
-import com.formation.pharmacy_manager.entities.DistributorDrug;
-import com.formation.pharmacy_manager.entities.Drug;
+// import com.formation.pharmacy_manager.entities.DistributorDrug;
+// import com.formation.pharmacy_manager.entities.Drug;
 import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.enumEntities.Type;
 import com.formation.pharmacy_manager.repository.DistributorRepository;

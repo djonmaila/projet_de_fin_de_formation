@@ -1,6 +1,6 @@
 package com.formation.pharmacy_manager.controller;
 
-import com.formation.pharmacy_manager.dto.DistributorDrugDto.DisDrugQteDto;
+// import com.formation.pharmacy_manager.dto.DistributorDrugDto.DisDrugQteDto;
 import com.formation.pharmacy_manager.dto.DistributorDrugDto.DistributorDrugDequestDto;
 import com.formation.pharmacy_manager.entities.DistributorDrug;
 import com.formation.pharmacy_manager.services.serviceDistributorDrug.DistributorDrugService;

@@ -2,7 +2,7 @@ package com.formation.pharmacy_manager.services.serviceCategory;
 
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryRequestDto;
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
-import com.formation.pharmacy_manager.entities.Category;
+// import com.formation.pharmacy_manager.entities.Category;
 
 import java.util.List;
 

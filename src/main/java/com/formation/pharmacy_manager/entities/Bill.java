@@ -2,7 +2,7 @@ package com.formation.pharmacy_manager.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+// import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-public class Receipt {
+public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long receiptId;
@@ -23,10 +23,10 @@ public class Receipt {
     @NotBlank
     private double totalAmount;
 
-    @NotNull
-    private LocalDate creation_date;
+    private LocalDate creationDate;
 
     @OneToOne
     @JoinColumn(name = "id_payment")
     private Payment payment;
+    
 }
