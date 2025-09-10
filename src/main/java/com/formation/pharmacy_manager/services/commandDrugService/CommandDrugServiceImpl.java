@@ -89,4 +89,44 @@ public class CommandDrugServiceImpl implements CommandDrugService{
                         cmd.getUserDis()
         )).orElse(null);
     }
+
+    @Override
+    public String deleteById(long id) {
+            CommandDrug cmd = commandeDrugRepository.findById(id).orElse(null);
+            if (cmd == null) throw new RuntimeException("command line doesn't exist");
+            DistributorDrug dis = distributorDrugRepository.getByUserNameAndDrugName(cmd.getDrug().getDrugName(),cmd.getUserDis());
+            dis.setQte(dis.getQte()+ cmd.getQuantity());
+            dis.setUpdate_date(new Date());
+            distributorDrugRepository.save(dis);
+
+            commandeDrugRepository.deleteById(id);
+
+            return "command line was successfully deleting";
+    }
+
+    @Override
+    public boolean existById(long id) {
+        return distributorDrugRepository.existsById(id);
+    }
+
+    @Override
+    public CommandeDrugResponseDto update(long id, CommandeDrugRequestDto dto) {
+        CommandDrug cmd = commandeDrugRepository.findById(id).orElse(null);
+
+        if (cmd == null) throw new RuntimeException("Command line cannot update because he doesn't exist");
+        cmd.setQuantity(dto.getQuantity());
+        cmd.setTime(LocalTime.now());
+        CommandDrug cmde = commandeDrugRepository.save(cmd);
+
+        return new CommandeDrugResponseDto(
+                cmde.getCommandDrugId(),
+                cmde.getCommand().getPseudo(),
+                cmde.getDrug().getDrugName(),
+                cmde.getQuantity(),
+                cmde.getDrug().getPrice(),
+                cmde.getDate(),
+                cmde.getTime(),
+                cmde.getUserDis()
+        );
+    }
 }

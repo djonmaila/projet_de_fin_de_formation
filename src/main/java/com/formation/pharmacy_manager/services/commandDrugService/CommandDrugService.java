@@ -10,4 +10,7 @@ public interface CommandDrugService {
     CommandeDrugResponseDto create(CommandeDrugRequestDto dto);
     List<CommandeDrugResponseDto> getAllCommandDrug();
     CommandeDrugResponseDto getById(long id);
+    String deleteById(long id);
+    boolean existById(long id);
+    CommandeDrugResponseDto update(long id,CommandeDrugRequestDto dto);
 }
