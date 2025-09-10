@@ -1,30 +1,26 @@
 package com.formation.pharmacy_manager.dto.distributorDto;
 
+import com.formation.pharmacy_manager.dto.userDto.UserRequestDto;
 import com.formation.pharmacy_manager.entities.Distributor;
-// import com.formation.pharmacy_manager.entities.Role;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-@AllArgsConstructor
 @Setter
 @Getter
-public class DistributorRequestDto {
-
-    private String userName;
-
-    private String phoneNumber;
-
-    private String email;
-
-    private String password;
+public class DistributorRequestDto extends UserRequestDto {
 
     private String distributorReference;
 
     private String role;
+
+    public DistributorRequestDto(String userName, String phoneNumber, String email, String password, String distributorReference,String role) {
+        super(userName, phoneNumber, email, password);
+        this.distributorReference = distributorReference;
+        this.role = role;
+    }
 
     public Distributor toDistributor(DistributorRequestDto dto){
         Distributor distributor = new Distributor();

@@ -23,6 +23,8 @@ public class CommandDrug {
 
     private int quantity;
 
+    private String userDis;
+
     private LocalDate date;
 
     private LocalTime time;

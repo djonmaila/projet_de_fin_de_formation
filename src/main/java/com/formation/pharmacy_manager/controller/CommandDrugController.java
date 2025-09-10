@@ -31,4 +31,9 @@ public class CommandDrugController {
     public ResponseEntity<CommandeDrugResponseDto> getCommandDugById(@PathVariable long id){
         return ResponseEntity.status(HttpStatus.OK).body(commandDrugService.getById(id));
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable long id){
+        return new ResponseEntity<>(commandDrugService.deleteById(id),HttpStatus.OK);
+    }
 }

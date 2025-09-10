@@ -31,5 +31,6 @@ public class Payment {
     private Command command;
 
     @OneToOne(mappedBy = "payment")
+
     private Bill bill;
 }
