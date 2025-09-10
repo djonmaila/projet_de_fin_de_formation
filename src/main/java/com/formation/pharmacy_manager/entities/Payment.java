@@ -18,18 +18,19 @@ public class Payment {
     private long paymentId;
 
     @NotBlank
-    private double amount;
+    private double totalAmount;
 
     @NotBlank
     private String paymentMethod;
 
     @NotBlank
-    private boolean paymentStatus;
+    private String paymentStatus;
 
     @OneToOne
     @JoinColumn(name = "id_command")
     private Command command;
 
     @OneToOne(mappedBy = "payment")
-    private Bill receipt;
+
+    private Bill bill;
 }

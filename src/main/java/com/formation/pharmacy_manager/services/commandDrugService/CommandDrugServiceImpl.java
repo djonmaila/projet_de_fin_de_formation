@@ -35,7 +35,7 @@ public class CommandDrugServiceImpl implements CommandDrugService{
         if (dis == null) throw new RuntimeException("stock insuffisant");
         dis.setQte(dis.getQte()-dto.getQuantity());
         dis.setUpdate_date(new Date());
-        String userName = dis.getDistributor().getUserName();
+        // String userName = dis.getDistributor().getUserName();
         distributorDrugRepository.save(dis);
 
 
