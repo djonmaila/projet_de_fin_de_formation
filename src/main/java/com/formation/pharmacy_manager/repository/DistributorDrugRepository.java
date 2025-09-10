@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface DistributorDrugRepository extends JpaRepository<DistributorDrug,Long> {
-
+    @Query("select distinct dis from DistributorDrug dis where dis.drug.drugName = :drugName and dis.distributor.userName = :userName")
+    DistributorDrug getByUserNameAndDrugName(@Param("drugName") String drugName, @Param("userName") String userName);
 }

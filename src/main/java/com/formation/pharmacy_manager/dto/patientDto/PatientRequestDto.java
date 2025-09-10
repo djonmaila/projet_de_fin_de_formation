@@ -1,5 +1,6 @@
 package com.formation.pharmacy_manager.dto.patientDto;
 
+import com.formation.pharmacy_manager.dto.userDto.UserRequestDto;
 import com.formation.pharmacy_manager.entities.Patient;
 import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.enumEntities.Type;
@@ -14,28 +15,17 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Date;
 
-
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
-@Setter
-@Service
-public class PatientRequestDto {
-    @NotBlank
-    private String userName;
+public class PatientRequestDto extends UserRequestDto {
 
-    @NotBlank
-    private String phoneNumber;
-
-    @NotBlank
-    @Email
-    private String email;
-
-    @NotBlank
-    private String password;
 
     @NotBlank
     private int age;
+
+    public PatientRequestDto(String userName, String phoneNumber, String email, String password,int age) {
+        super(userName, phoneNumber, email, password);
+        this.age = age;
+    }
 
 
     public Patient toPatient(PatientRequestDto requestDto){
