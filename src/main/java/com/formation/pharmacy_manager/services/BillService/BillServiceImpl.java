@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.formation.pharmacy_manager.dto.billDto.BillRequestDto;
+import com.formation.pharmacy_manager.dto.billDto.BillResponseDto;
 import com.formation.pharmacy_manager.entities.Bill;
 import com.formation.pharmacy_manager.entities.Payment;
 import com.formation.pharmacy_manager.repository.BillRepository;
@@ -41,6 +43,12 @@ public class BillServiceImpl implements BillService{
     public Optional<Bill> getBillById(long id) {
         
         return billRepository.findById(id);
+    }
+
+    @Override
+    public BillResponseDto createBill(BillRequestDto billDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createBill'");
     }
 
 }

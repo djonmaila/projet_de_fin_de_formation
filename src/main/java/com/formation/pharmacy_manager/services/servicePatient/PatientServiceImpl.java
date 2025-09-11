@@ -4,12 +4,10 @@ import com.formation.pharmacy_manager.dto.patientDto.PatientRequestDto;
 import com.formation.pharmacy_manager.dto.patientDto.PatientResponseDto;
 import com.formation.pharmacy_manager.entities.Patient;
 import com.formation.pharmacy_manager.repository.PatientRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Service
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;

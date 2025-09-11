@@ -10,7 +10,6 @@ import com.formation.pharmacy_manager.repository.CommandRepository;
 import com.formation.pharmacy_manager.repository.CommandeDrugRepository;
 import com.formation.pharmacy_manager.repository.DistributorDrugRepository;
 import com.formation.pharmacy_manager.repository.DrugRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,7 +18,6 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class CommandDrugServiceImpl implements CommandDrugService{
     private CommandeDrugRepository commandeDrugRepository;
     private DrugRepository drugRepository;
