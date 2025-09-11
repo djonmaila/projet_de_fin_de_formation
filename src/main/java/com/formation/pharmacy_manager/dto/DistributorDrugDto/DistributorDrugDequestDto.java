@@ -17,5 +17,5 @@ public class DistributorDrugDequestDto {
         dis.setCreation_date(new Date());
         dis.setUpdate_date(new Date());
         return dis;
-    }
+    } 
 }

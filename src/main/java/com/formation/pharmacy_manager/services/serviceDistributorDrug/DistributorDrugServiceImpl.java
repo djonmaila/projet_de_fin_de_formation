@@ -4,18 +4,14 @@ import com.formation.pharmacy_manager.dto.DistributorDrugDto.DistributorDrugDequ
 import com.formation.pharmacy_manager.dto.DistributorDrugDto.DistributorDrugResponseDto;
 import com.formation.pharmacy_manager.dto.commandeDrugDto.CommandeDrugResponseDto;
 import com.formation.pharmacy_manager.entities.DistributorDrug;
-// import com.formation.pharmacy_manager.entities.Drug;
 import com.formation.pharmacy_manager.repository.DistributorDrugRepository;
 import com.formation.pharmacy_manager.repository.DistributorRepository;
 import com.formation.pharmacy_manager.repository.DrugRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-// import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class DistributorDrugServiceImpl implements DistributorDrugService{
     private DistributorDrugRepository distributorDrugRepository;
     private DistributorRepository distributorRepository;
