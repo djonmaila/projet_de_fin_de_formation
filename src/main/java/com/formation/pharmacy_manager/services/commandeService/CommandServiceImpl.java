@@ -7,14 +7,14 @@ import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.User;
 import com.formation.pharmacy_manager.repository.CommandRepository;
 import com.formation.pharmacy_manager.repository.UserRepository;
-// import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-// @AllArgsConstructor
+@AllArgsConstructor
 public class CommandServiceImpl implements CommandService{
     private CommandRepository commandRepository;
     private UserRepository userRepository;

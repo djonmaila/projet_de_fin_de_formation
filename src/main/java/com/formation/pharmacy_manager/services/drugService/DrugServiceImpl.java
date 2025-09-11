@@ -7,14 +7,14 @@ import com.formation.pharmacy_manager.entities.DistributorDrug;
 import com.formation.pharmacy_manager.entities.Drug;
 import com.formation.pharmacy_manager.repository.CategoryRepository;
 import com.formation.pharmacy_manager.repository.DrugRepository;
-// import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-// @AllArgsConstructor
+@AllArgsConstructor
 public class DrugServiceImpl implements DrugService{
     private DrugRepository drugRepository;
     private CategoryRepository categoryRepository;

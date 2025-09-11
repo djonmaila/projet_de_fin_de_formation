@@ -1,13 +1,6 @@
 package com.formation.pharmacy_manager.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import lombok.Data;
 
 import java.time.LocalDate;
