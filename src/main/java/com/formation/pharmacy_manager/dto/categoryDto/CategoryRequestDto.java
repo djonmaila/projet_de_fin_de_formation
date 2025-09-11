@@ -24,3 +24,4 @@ public class CategoryRequestDto {
         return category;
     }
 }
+

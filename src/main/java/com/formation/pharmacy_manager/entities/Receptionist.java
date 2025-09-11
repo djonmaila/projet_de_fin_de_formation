@@ -14,3 +14,4 @@ import lombok.Setter;
 public class Receptionist extends User{
 
 }
+ 

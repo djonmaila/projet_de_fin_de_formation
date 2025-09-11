@@ -3,24 +3,18 @@ package com.formation.pharmacy_manager.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 // import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
+
+@Entity 
+@Data
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long receiptId;
+    private long billId;
 
-    @NotBlank
     private double totalAmount;
 
     private LocalDate creationDate;

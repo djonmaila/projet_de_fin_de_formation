@@ -6,4 +6,4 @@ import lombok.Getter;
 public class DisDrugQteDto {
     private String drugName;
     private int qte;
-}
+}  

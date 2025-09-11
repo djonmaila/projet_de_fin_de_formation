@@ -11,7 +11,7 @@ public class CommandeRequestDto {
     public Command toCommandEntity(CommandeRequestDto dto){
         Command command = new Command();
         command.setPseudo(dto.index);
-
+ 
         return command;
     }
 }
