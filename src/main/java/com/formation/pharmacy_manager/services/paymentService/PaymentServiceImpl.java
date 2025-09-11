@@ -13,12 +13,12 @@ import com.formation.pharmacy_manager.entities.Payment;
 import com.formation.pharmacy_manager.repository.CommandRepository;
 import com.formation.pharmacy_manager.repository.PaymentRepository;
 
-// import lombok.AllArgsConstructor;
-// import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Service
-// @AllArgsConstructor
-// @Data
+@AllArgsConstructor
+@Data
 public class PaymentServiceImpl implements PaymentService{
     @Autowired
     private PaymentRepository paymentRepository;
@@ -38,6 +38,7 @@ public class PaymentServiceImpl implements PaymentService{
                 payment.setTotalAmount(paymentRequestDto.getTotalAmount());
                 payment.setPaymentStatus("PENDING");
                 payment.setCommand(command);
+                
 
                 Payment savPayment = paymentRepository.save(payment);
                 PaymentResponseDto paymentResponseDto = new PaymentResponseDto();
@@ -46,6 +47,7 @@ public class PaymentServiceImpl implements PaymentService{
                 paymentResponseDto.setTotalAmount(savPayment.getTotalAmount());
                 paymentResponseDto.setPaymentStatus(savPayment.getPaymentStatus());
                 paymentResponseDto.setCommandId(savPayment.getCommand().getCommandId());
+                paymentResponseDto.setPaymentDate(savPayment.getPaymentDate());
 
                 return paymentResponseDto;
     }
@@ -64,6 +66,16 @@ public class PaymentServiceImpl implements PaymentService{
     public List<Payment> getPaymentsByMethod(String method) {
         return paymentRepository.searchByPaymentMethod(method);
     }
+
+    @Override
+    public List<Payment> findByCommand(Long commandId) {
+        return paymentRepository.findByCommand(commandId);
+    }
+
+    // @Override
+    // public List<Payment> findByPatient(String email) {
+    //     return paymentRepository.findByPatient(email);
+    // }
 
 }
 

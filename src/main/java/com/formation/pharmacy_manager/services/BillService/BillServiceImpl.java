@@ -6,15 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.formation.pharmacy_manager.dto.billDto.BillRequestDto;
-import com.formation.pharmacy_manager.dto.billDto.BillResponseDto;
 import com.formation.pharmacy_manager.entities.Bill;
 import com.formation.pharmacy_manager.entities.Payment;
 import com.formation.pharmacy_manager.repository.BillRepository;
 import com.formation.pharmacy_manager.repository.PaymentRepository;
 
 @Service
+
 public class BillServiceImpl implements BillService{
 
     @Autowired
@@ -26,7 +24,7 @@ public class BillServiceImpl implements BillService{
     @Override
     public Bill generateBill(long paymentId, String paymentMethod) {
         Payment payment = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("No payment found with id "+ paymentId));
-        if (!"TERMINÉE".equals(payment.getPaymentStatus())) {
+        if (!"FINISH".equals(payment.getPaymentStatus())) {
             throw new RuntimeException("Cannot generate bill for an unfinished command.");
         }
 
@@ -45,10 +43,6 @@ public class BillServiceImpl implements BillService{
         return billRepository.findById(id);
     }
 
-    @Override
-    public BillResponseDto createBill(BillRequestDto billDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createBill'");
-    }
+    
 
 }

@@ -5,13 +5,13 @@ import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.entities.Category;
 import com.formation.pharmacy_manager.entities.Drug;
 import com.formation.pharmacy_manager.repository.CategoryRepository;
-// import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 @Service
-// @AllArgsConstructor
+@AllArgsConstructor
 public class CategoryServiceImpl implements CategoryService{
     private CategoryRepository categoryRepository;
     @Override

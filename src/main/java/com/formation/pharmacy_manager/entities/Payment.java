@@ -1,5 +1,6 @@
 package com.formation.pharmacy_manager.entities;
 
+import java.time.LocalDate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class Payment {
     private String paymentMethod;
   
     private String paymentStatus;
+
+    private LocalDate paymentDate;
 
     @OneToOne
     @JoinColumn(name = "id_command")
