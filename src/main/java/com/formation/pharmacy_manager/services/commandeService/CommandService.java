@@ -10,4 +10,7 @@ import java.util.List;
 public interface CommandService {
     CommandeResponseDto createCommande(CommandeRequestDto dto);
     List<DrugResponseDto> getListDrugToCommand(String pseudo);
+    CommandeResponseDto updateCommande(long id,CommandeRequestDto dto);
+    boolean existById(long id);
+    String deleteById(long id);
 }

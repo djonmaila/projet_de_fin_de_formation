@@ -1,8 +1,6 @@
 package com.formation.pharmacy_manager.entities;
 
 import jakarta.persistence.*;
-// import jakarta.validation.constraints.NotBlank;
-// import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +20,8 @@ public class CommandDrug {
     private long commandDrugId;
 
     private int quantity;
+
+    private String userDis;
 
     private LocalDate date;
 

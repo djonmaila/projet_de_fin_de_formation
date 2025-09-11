@@ -1,6 +1,5 @@
 package com.formation.pharmacy_manager.services.drugService;
 
-// import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugRequestDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.entities.CommandDrug;
