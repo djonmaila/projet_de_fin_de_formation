@@ -11,10 +11,9 @@ import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
-    private PatientRequestDto requestDto;
     @Override
     public PatientResponseDto createPatient(PatientRequestDto dto) {
-        Patient newPatient = requestDto.toPatient(dto);
+        Patient newPatient = dto.toPatient(dto);
         Patient saved = patientRepository.save(newPatient);
         return new PatientResponseDto(
                 saved.getUserId(),
@@ -40,7 +39,7 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public PatientResponseDto getPatientById(long id) {
         Patient patient = patientRepository.findById(id).get();
-        if (patient == null) throw new RuntimeException("user avec l'id : "+id+" introuvable");
+        if (patient == null) throw new RuntimeException("user with id : "+id+" not found");
         return new PatientResponseDto(
                 patient.getUserId(),
                 patient.getUserName(),
@@ -54,9 +53,9 @@ public class PatientServiceImpl implements PatientService{
     public String deleteById(long id) {
         if (existById(id)){
             patientRepository.deleteById(id);
-            return "patient supprimer avec succès";
+            return "patient deleting successfully";
         }else{
-            return "suppression échoué";
+            return "enable to delete this user because he wasn't found";
         }
     }
 
