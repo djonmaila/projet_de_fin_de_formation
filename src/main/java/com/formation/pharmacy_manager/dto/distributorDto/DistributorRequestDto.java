@@ -14,12 +14,9 @@ public class DistributorRequestDto extends UserRequestDto {
 
     private String distributorReference;
 
-    private String role;
-
     public DistributorRequestDto(String userName, String phoneNumber, String email, String password, String distributorReference,String role) {
-        super(userName, phoneNumber, email, password);
+        super(userName, phoneNumber, email, password,role);
         this.distributorReference = distributorReference;
-        this.role = role;
     }
 
     public Distributor toDistributor(DistributorRequestDto dto){
