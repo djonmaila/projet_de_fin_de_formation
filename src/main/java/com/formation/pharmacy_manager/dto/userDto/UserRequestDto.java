@@ -22,4 +22,7 @@ public class UserRequestDto {
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    private String role;
 }
