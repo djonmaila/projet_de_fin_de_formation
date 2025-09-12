@@ -22,8 +22,8 @@ public class PatientRequestDto extends UserRequestDto {
     @NotBlank
     private int age;
 
-    public PatientRequestDto(String userName, String phoneNumber, String email, String password,int age) {
-        super(userName, phoneNumber, email, password);
+    public PatientRequestDto(String userName, String phoneNumber, String email, String password,int age,String role) {
+        super(userName, phoneNumber, email, password,role);
         this.age = age;
     }
 

@@ -22,7 +22,7 @@ public class DrugController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<DrugResponseDto>> getAllDistributor(){
+    public ResponseEntity<List<DrugResponseDto>> getAllDrug(){
         return ResponseEntity.ok(drugService.getAllDrug());
     }
 
@@ -37,7 +37,12 @@ public class DrugController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<DrugResponseDto> updateDistributor(@PathVariable long id , @RequestBody DrugRequestDto dto){
+    public ResponseEntity<DrugResponseDto> updateDrug(@PathVariable long id , @RequestBody DrugRequestDto dto){
         return  ResponseEntity.status(HttpStatus.OK).body(drugService.updateDrug(id,dto));
+    }
+
+    @GetMapping("/key/{key}")
+    public ResponseEntity<List<DrugResponseDto>> getByKeyWord(@PathVariable String key){
+        return new ResponseEntity<>(drugService.searchByKeyWorld(key),HttpStatus.OK);
     }
 }

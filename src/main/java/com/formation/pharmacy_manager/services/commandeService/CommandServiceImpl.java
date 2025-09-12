@@ -49,6 +49,17 @@ public class CommandServiceImpl implements CommandService{
                 )).toList();
     }
 
+    @Override
+    public List<CommandeResponseDto> getListCommand() {
+        return commandRepository.findAll().stream().map(
+                cmd-> new CommandeResponseDto(
+                        cmd.getCommandId(),
+                        cmd.getPseudo(),
+                        cmd.getUser().getUserName(),
+                        cmd.getCreation_date()
+                )).toList();
+    }
+
     public String deleteById(long id){
         if (commandRepository.existsById(id)){
             commandRepository.deleteById(id);
