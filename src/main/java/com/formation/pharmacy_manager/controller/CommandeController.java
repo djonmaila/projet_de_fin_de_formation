@@ -22,8 +22,21 @@ public class CommandeController {
         return ResponseEntity.status(HttpStatus.OK).body(commandService.createCommande(dto));
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<CommandeResponseDto>> getAllCommand(){
+        return new ResponseEntity<>(commandService.getListCommand(),HttpStatus.OK);
+    }
     @GetMapping("/listDrug/{pseudo}")
     public ResponseEntity<List<DrugResponseDto>> getDrugContentToCommande(@PathVariable String pseudo){
         return ResponseEntity.status(HttpStatus.OK).body(commandService.getListDrugToCommand(pseudo));
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCommandById(@PathVariable long id){
+        return new ResponseEntity<>(commandService.deleteById(id),HttpStatus.OK);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<CommandeResponseDto> updateCommande(@PathVariable long id,@RequestBody CommandeRequestDto dto){
+        return new ResponseEntity<>(commandService.updateCommande(id,dto),HttpStatus.OK);
     }
 }

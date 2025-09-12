@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface CommandRepository extends JpaRepository<Command,Long> {
     Command findDistinctByPseudo(String pseudo);
-    @Query("select d from Command c join c.commandDrugList cd join cd.drug d where c.pseudo = :pseudo")
+    @Query("select cd.drug from Command c join c.commandDrugList cd where c.pseudo = :pseudo")
     List<Drug> getListDrugToCommand(@Param("pseudo") String pseudo);
 }

@@ -15,10 +15,9 @@ public class Bill {
 
     private double totalAmount;
 
-    private LocalDate creationDate;
+    private LocalDate creation_date;
 
     @OneToOne
     @JoinColumn(name = "id_payment")
     private Payment payment;
-    
 }

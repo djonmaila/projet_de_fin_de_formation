@@ -1,6 +1,5 @@
 package com.formation.pharmacy_manager.services.drugService;
 
-// import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugRequestDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.entities.CommandDrug;
@@ -96,6 +95,22 @@ public class DrugServiceImpl implements DrugService{
                 dg.getCreation_date(),
                 dg.getUpdate_date()
         );
+    }
+
+    @Override
+    public List<DrugResponseDto> searchByKeyWorld(String key) {
+        return drugRepository.searchByKeyWorld(key).stream().map(
+                dg->new DrugResponseDto(
+                        dg.getDrugId(),
+                        dg.getDrugName(),
+                        dg.getDrugDescription(),
+                        dg.getPeremption(),
+                        dg.getPrice(),
+                        dg.getCategory().getCategoryType(),
+                        dg.getCreation_date(),
+                        dg.getUpdate_date()
+                )
+        ).toList();
     }
 
     public DrugResponseDto getById(long id){

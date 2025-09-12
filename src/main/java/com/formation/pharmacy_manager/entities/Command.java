@@ -32,7 +32,7 @@ public class Command {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @OneToMany(mappedBy = "command")
+    @OneToMany(mappedBy = "command",cascade = CascadeType.REMOVE)
     private List<CommandDrug> commandDrugList = new ArrayList<>();
 
     @OneToOne(mappedBy = "command")
