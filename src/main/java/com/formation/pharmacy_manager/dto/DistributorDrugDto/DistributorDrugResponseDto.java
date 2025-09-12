@@ -12,3 +12,4 @@ public record DistributorDrugResponseDto(
         Date update
 ) {
 }
+  

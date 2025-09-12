@@ -1,7 +1,7 @@
 package com.formation.pharmacy_manager.entities;
 
+import java.time.LocalDate;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,18 +17,17 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long paymentId;
 
-    @NotBlank
-    private double amount;
-
-    @NotBlank
+    private double totalAmount;
+  
     private String paymentMethod;
+  
+    private String paymentStatus;
 
-    @NotBlank
-    private boolean paymentStatus;
+    private LocalDate paymentDate;
 
     @OneToOne
     @JoinColumn(name = "id_command")
-    private Command command;
+    private Command command; 
 
     @OneToOne(mappedBy = "payment")
     private Bill bill;
