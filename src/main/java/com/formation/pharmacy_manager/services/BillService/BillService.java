@@ -6,6 +6,6 @@ import com.formation.pharmacy_manager.entities.Bill;
 
 public interface BillService {
     
-    Bill generateBill(long paymentId, String paymentMethod);
+    Bill generateBill(long paymentId);
     Optional<Bill> getBillById(long id);
 }

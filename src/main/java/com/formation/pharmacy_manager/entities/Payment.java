@@ -19,9 +19,11 @@ public class Payment {
 
     private double totalAmount;
   
-    private String paymentMethod;
-  
-    private String paymentStatus;
+    @Enumerated(EnumType.STRING)
+    private PaymentMethod paymentMethod;
+
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus paymentStatus;
 
     private LocalDate paymentDate;
 

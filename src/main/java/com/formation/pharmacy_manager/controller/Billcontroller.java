@@ -1,5 +1,7 @@
 package com.formation.pharmacy_manager.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,25 +27,35 @@ public class Billcontroller {
 
     @PostMapping("/create")
     public ResponseEntity<BillResponseDto> createBill(@RequestBody BillRequestDto billRequest) {
-        try {
-            Bill bill = billService.generateBill(billRequest.getPaymentId(), billRequest.getPaymentMethod());
-            BillResponseDto responseDto = new BillResponseDto(
-                bill.getBillId(),
-                bill.getPayment().getPaymentId(),
-                bill.getCreationDate(),
-                bill.getTotalAmount(),
-                bill.getPayment().getPaymentMethod());
-            
-            return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            // Retourne une réponse avec le statut 400 et le message d'erreur de l'exception
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        Bill bill = billService.generateBill(billRequest.getPaymentId());
+        
+        BillResponseDto responseDto = new BillResponseDto(
+            bill.getBillId(),
+            bill.getPayment().getPaymentId(),
+            bill.getCreationDate(),
+            bill.getTotalAmount(),
+            bill.getPayment().getPaymentMethod().name());
+
+        return new ResponseEntity<>(responseDto, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findBillById(@PathVariable long id){
-        return ResponseEntity.ok(billService.getBillById(id));
+    public ResponseEntity<?> findBillById(@PathVariable long id) {
+        Optional<Bill> billOptional = billService.getBillById(id);
+        
+        if (billOptional.isPresent()) {
+            Bill foundBill = billOptional.get();
+            BillResponseDto responseDto = new BillResponseDto(
+                foundBill.getBillId(),
+                foundBill.getPayment().getPaymentId(),
+                foundBill.getCreationDate(),
+                foundBill.getTotalAmount(),
+                foundBill.getPayment().getPaymentMethod().name());
+            
+            return ResponseEntity.ok(responseDto);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     
 }
