@@ -1,5 +1,6 @@
 package com.formation.pharmacy_manager.controller;
 
+import com.formation.pharmacy_manager.dto.categoryDto.CategoryPriceDto;
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryRequestDto;
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.services.serviceCategory.CategoryService;
@@ -39,5 +40,10 @@ public class CategoryController {
     @PutMapping("/update/{id}")
     public ResponseEntity<CategoryResponseDto> updateCategory(@PathVariable long id, @RequestBody CategoryRequestDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(id,dto));
+    }
+
+    @GetMapping("/categoryTypeAndSumPrice")
+    public ResponseEntity<List<CategoryPriceDto>> getCategoryTypeAndSumPrice(){
+        return new ResponseEntity<>(categoryService.getCategoryBySumPrice(),HttpStatus.OK);
     }
 }

@@ -112,8 +112,23 @@ public class CommandDrugServiceImpl implements CommandDrugService{
     @Override
     public CommandeDrugResponseDto update(long id, CommandeDrugRequestDto dto) {
         CommandDrug cmd = commandeDrugRepository.findById(id).orElse(null);
-
+        int updateQte = 0;
         if (cmd == null) throw new RuntimeException("Command line cannot update because he doesn't exist");
+
+        DistributorDrug dis = distributorDrugRepository.getByUserNameAndDrugName(cmd.getDrug().getDrugName(),cmd.getUserDis());
+        if(cmd.getQuantity()<dto.getQuantity()){
+            updateQte = dto.getQuantity()-cmd.getQuantity();
+            dis.setQte(dis.getQte()-updateQte);
+        }else {
+            updateQte = cmd.getQuantity()- dto.getQuantity();
+            dis.setQte(dis.getQte()+updateQte);
+        }
+        dis.setUpdate_date(new Date());
+        distributorDrugRepository.save(dis);
+
+
+        dis.setUpdate_date(new Date());
+        distributorDrugRepository.save(dis);
         cmd.setQuantity(dto.getQuantity());
         cmd.setTime(LocalTime.now());
         CommandDrug cmde = commandeDrugRepository.save(cmd);

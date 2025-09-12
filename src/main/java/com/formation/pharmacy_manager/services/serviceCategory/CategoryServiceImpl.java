@@ -1,5 +1,6 @@
 package com.formation.pharmacy_manager.services.serviceCategory;
 
+import com.formation.pharmacy_manager.dto.categoryDto.CategoryPriceDto;
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryRequestDto;
 import com.formation.pharmacy_manager.dto.categoryDto.CategoryResponseDto;
 import com.formation.pharmacy_manager.entities.Category;
@@ -80,5 +81,10 @@ public class CategoryServiceImpl implements CategoryService{
                 cat.getCategoryType(),
                 cat.getCategoryName()
         );
+    }
+
+    @Override
+    public List<CategoryPriceDto> getCategoryBySumPrice() {
+        return categoryRepository.getCategoryBySumPrice();
     }
 }

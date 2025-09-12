@@ -3,7 +3,10 @@ package com.formation.pharmacy_manager.services.servicePatient;
 import com.formation.pharmacy_manager.dto.patientDto.PatientRequestDto;
 import com.formation.pharmacy_manager.dto.patientDto.PatientResponseDto;
 import com.formation.pharmacy_manager.entities.Patient;
+import com.formation.pharmacy_manager.entities.Role;
+import com.formation.pharmacy_manager.enumEntities.Type;
 import com.formation.pharmacy_manager.repository.PatientRepository;
+import com.formation.pharmacy_manager.repository.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,12 @@ import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
+    private RoleRepository roleRepository;
     @Override
     public PatientResponseDto createPatient(PatientRequestDto dto) {
         Patient newPatient = dto.toPatient(dto);
+        Role role = roleRepository.getByType(Type.valueOf(dto.getRole()));
+        newPatient.getRoles().add(role);
         Patient saved = patientRepository.save(newPatient);
         return new PatientResponseDto(
                 saved.getUserId(),

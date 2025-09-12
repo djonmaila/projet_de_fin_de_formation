@@ -2,6 +2,7 @@ package com.formation.pharmacy_manager.services.drugService;
 
 import com.formation.pharmacy_manager.dto.drugDto.DrugRequestDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
+import com.formation.pharmacy_manager.entities.Drug;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface DrugService {
     String deleteById(long id);
     boolean existById(long id);
     DrugResponseDto updateDrug(long id , DrugRequestDto dto);
+    List<DrugResponseDto> searchByKeyWorld(String key);
 }
