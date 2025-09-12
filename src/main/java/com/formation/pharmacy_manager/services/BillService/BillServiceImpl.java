@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.formation.pharmacy_manager.entities.Bill;
 import com.formation.pharmacy_manager.entities.Payment;
+import com.formation.pharmacy_manager.entities.PaymentStatus;
+import com.formation.pharmacy_manager.exceptions.PaymentException;
 import com.formation.pharmacy_manager.repository.BillRepository;
 import com.formation.pharmacy_manager.repository.PaymentRepository;
 
@@ -22,24 +24,24 @@ public class BillServiceImpl implements BillService{
     private PaymentRepository paymentRepository;
 
     @Override
-    public Bill generateBill(long paymentId, String paymentMethod) {
-        Payment payment = paymentRepository.findById(paymentId).orElseThrow(() -> new RuntimeException("No payment found with id "+ paymentId));
-        if (!"FINISH".equals(payment.getPaymentStatus())) {
-            throw new RuntimeException("Cannot generate bill for an unfinished command.");
+    public Bill generateBill(long paymentId) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new PaymentException("No payment found with id: " + paymentId));
+
+        if (payment.getPaymentStatus() != PaymentStatus.FINISHED) {
+            throw new PaymentException("Cannot generate bill for an unfinished payment.");
         }
 
         Bill bill = new Bill();
         bill.setPayment(payment);
         bill.setCreationDate(LocalDate.now());
         bill.setTotalAmount(payment.getTotalAmount());
-        bill.getPayment().setPaymentMethod(paymentMethod);
         
         return billRepository.save(bill);
     }
 
     @Override
     public Optional<Bill> getBillById(long id) {
-        
         return billRepository.findById(id);
     }
 
