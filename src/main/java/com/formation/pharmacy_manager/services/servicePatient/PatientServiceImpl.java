@@ -7,13 +7,15 @@ import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.enumEntities.Type;
 import com.formation.pharmacy_manager.repository.PatientRepository;
 import com.formation.pharmacy_manager.repository.RoleRepository;
+
 import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
     private RoleRepository roleRepository;

@@ -2,8 +2,8 @@ package com.formation.pharmacy_manager.dto.patientDto;
 
 import com.formation.pharmacy_manager.dto.userDto.UserRequestDto;
 import com.formation.pharmacy_manager.entities.Patient;
-import com.formation.pharmacy_manager.entities.Role;
-import com.formation.pharmacy_manager.enumEntities.Type;
+// import com.formation.pharmacy_manager.entities.Role;
+// import com.formation.pharmacy_manager.enumEntities.Type;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
