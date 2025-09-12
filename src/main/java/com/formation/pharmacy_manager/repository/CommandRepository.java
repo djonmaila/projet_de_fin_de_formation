@@ -1,5 +1,8 @@
 package com.formation.pharmacy_manager.repository;
 
+import com.formation.pharmacy_manager.dto.commandeDto.CommandDate;
+import com.formation.pharmacy_manager.dto.commandeDto.TotalMoneyPerCommand;
+import com.formation.pharmacy_manager.dto.commandeDto.TotalQuantityForDrugCommand;
 import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.Drug;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +15,15 @@ public interface CommandRepository extends JpaRepository<Command,Long> {
     Command findDistinctByPseudo(String pseudo);
     @Query("select cd.drug from Command c join c.commandDrugList cd where c.pseudo = :pseudo")
     List<Drug> getListDrugToCommand(@Param("pseudo") String pseudo);
+    @Query("select new com.formation.pharmacy_manager.dto.commandeDto.CommandDate(d.date,count(c)) from Command c join c.commandDrugList d group by d.date")
+    List<CommandDate> totalCommandPassPerDate();
+
+    @Query("select new com.formation.pharmacy_manager.dto.commandeDto.TotalMoneyPerCommand(c.pseudo , sum(cd.drug.price*cd.quantity)) from Command c join c.commandDrugList cd group by c.pseudo")
+    List<TotalMoneyPerCommand> totalRevenuCommand();
+
+    @Query("select new com.formation.pharmacy_manager.dto.commandeDto.TotalQuantityForDrugCommand(c.pseudo , sum(cd.quantity)) from Command c join c.commandDrugList cd group by c.pseudo")
+    List<TotalQuantityForDrugCommand> totalQuantityDrugInCommandDrug();
+
+    @Query("select sum(cd.quantity) from Command c join c.commandDrugList cd where c.pseudo = :pseudo")
+    long totalQteDrugHavingCommand(@Param("pseudo") String pseudo);
 }
