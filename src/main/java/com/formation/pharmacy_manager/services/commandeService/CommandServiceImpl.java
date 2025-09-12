@@ -1,7 +1,6 @@
 package com.formation.pharmacy_manager.services.commandeService;
 
-import com.formation.pharmacy_manager.dto.commandeDto.CommandeRequestDto;
-import com.formation.pharmacy_manager.dto.commandeDto.CommandeResponseDto;
+import com.formation.pharmacy_manager.dto.commandeDto.*;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.User;
@@ -66,6 +65,26 @@ public class CommandServiceImpl implements CommandService{
             return "command was deleting successfully";
         }
         return "impossible to delete this command because the command wasn't found";
+    }
+
+    @Override
+    public List<CommandDate> totalCommandPerDate() {
+        return commandRepository.totalCommandPassPerDate();
+    }
+
+    @Override
+    public List<TotalMoneyPerCommand> totalRevenuCommand() {
+        return commandRepository.totalRevenuCommand();
+    }
+
+    @Override
+    public List<TotalQuantityForDrugCommand> totalQuantityDrugInCommandDrug() {
+        return commandRepository.totalQuantityDrugInCommandDrug();
+    }
+
+    @Override
+    public long totalQteDrugHavingCommand(String pseudo) {
+        return commandRepository.totalQteDrugHavingCommand(pseudo);
     }
 
     public boolean existById(long id){
