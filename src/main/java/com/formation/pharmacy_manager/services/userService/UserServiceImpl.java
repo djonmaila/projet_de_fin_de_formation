@@ -1,7 +1,9 @@
 package com.formation.pharmacy_manager.services.userService;
 
+import com.formation.pharmacy_manager.dto.commandeDto.CommandeResponseDto;
 import com.formation.pharmacy_manager.dto.roleDto.RoleResponseDto;
 import com.formation.pharmacy_manager.dto.userDto.UserRoleRequestDto;
+import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.entities.User;
 import com.formation.pharmacy_manager.repository.RoleRepository;
@@ -40,5 +42,29 @@ public class UserServiceImpl implements UserService {
                 r->new RoleResponseDto(
                         r.getType()
                 )).toList();
+    }
+
+    @Override
+    public List<CommandeResponseDto> getCommandNotEmpty(String userName) {
+        return userRepository.getCommandNotEmpty(userName).stream().map(
+                cmd->new CommandeResponseDto(
+                cmd.getCommandId(),
+                cmd.getPseudo(),
+                cmd.getUser().getUserName(),
+                cmd.getCreation_date()
+                )
+        ).toList();
+    }
+
+    @Override
+    public List<CommandeResponseDto> getCommandEmpty(String userName) {
+        return userRepository.getCommandEmpty(userName).stream().map(
+                cmd->new CommandeResponseDto(
+                        cmd.getCommandId(),
+                        cmd.getPseudo(),
+                        cmd.getUser().getUserName(),
+                        cmd.getCreation_date()
+                )
+        ).toList();
     }
 }
