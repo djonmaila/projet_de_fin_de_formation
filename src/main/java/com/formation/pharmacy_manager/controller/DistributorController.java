@@ -6,6 +6,7 @@ import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.dto.patientDto.PatientResponseDto;
 import com.formation.pharmacy_manager.entities.Drug;
 import com.formation.pharmacy_manager.services.serviceDistributor.DistributorService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class DistributorController {
     private DistributorService distributorService;
 
     @PostMapping("/create")
-    public ResponseEntity<DistributorResponseDto> create(@RequestBody DistributorRequestDto dto){
+    public ResponseEntity<DistributorResponseDto> create(@Valid @RequestBody DistributorRequestDto dto){
         return ResponseEntity.status(HttpStatus.OK).body(distributorService.create(dto));
     }
 
@@ -40,7 +41,7 @@ public class DistributorController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<DistributorResponseDto> updateDistributor(@PathVariable long id , @RequestBody DistributorRequestDto dto){
+    public ResponseEntity<DistributorResponseDto> updateDistributor(@PathVariable long id ,@Valid @RequestBody DistributorRequestDto dto){
         return  ResponseEntity.status(HttpStatus.OK).body(distributorService.updateDistributor(id,dto));
     }
 
