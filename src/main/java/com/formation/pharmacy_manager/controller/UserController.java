@@ -1,5 +1,6 @@
 package com.formation.pharmacy_manager.controller;
 
+import com.formation.pharmacy_manager.dto.commandeDto.CommandeResponseDto;
 import com.formation.pharmacy_manager.dto.roleDto.RoleResponseDto;
 import com.formation.pharmacy_manager.dto.userDto.UserRoleRequestDto;
 import com.formation.pharmacy_manager.services.userService.UserService;
@@ -31,5 +32,15 @@ public class UserController {
     @GetMapping("/{email}")
     public ResponseEntity<List<RoleResponseDto>> getRolesToUser(@PathVariable String email){
         return new ResponseEntity<>(userService.getRolesForUser(email),HttpStatus.OK);
+    }
+
+    @GetMapping("/listCommandNotEmpty/{userName}")
+    public ResponseEntity<List<CommandeResponseDto>> getCommandPassedForUser(@PathVariable String userName){
+        return new ResponseEntity<>(userService.getCommandNotEmpty(userName),HttpStatus.OK);
+    }
+
+    @GetMapping("/listCommandEmpty/{userName}")
+    public ResponseEntity<List<CommandeResponseDto>> getCommandEmpty(@PathVariable String userName){
+        return new ResponseEntity<>(userService.getCommandEmpty(userName),HttpStatus.OK);
     }
 }

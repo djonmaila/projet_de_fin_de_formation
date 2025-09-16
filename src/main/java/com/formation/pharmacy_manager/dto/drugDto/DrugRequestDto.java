@@ -15,16 +15,4 @@ public class DrugRequestDto {
     private LocalDate peremption;
     private double price;
     private String type;
-
-    public Drug toDrugEntity(DrugRequestDto dto){
-        Drug drug = new Drug();
-        drug.setDrugName(dto.getDrugName());
-        drug.setDrugDescription(dto.getDrugDescription());
-        drug.setPeremption(dto.getPeremption());
-        drug.setPrice(dto.getPrice());
-        drug.setCreation_date(new Date());
-        drug.setUpdate_date(new Date());
-
-        return drug;
-    }
 }

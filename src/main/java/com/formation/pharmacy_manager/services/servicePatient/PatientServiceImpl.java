@@ -12,6 +12,8 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,12 +21,21 @@ import java.util.List;
 public class PatientServiceImpl implements PatientService{
     private PatientRepository patientRepository;
     private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
     @Override
-    public PatientResponseDto createPatient(PatientRequestDto dto) {
-        Patient newPatient = dto.toPatient(dto);
-        Role role = roleRepository.getByType(Type.valueOf(dto.getRole()));
-        newPatient.getRoles().add(role);
-        Patient saved = patientRepository.save(newPatient);
+    public PatientResponseDto createPatient(PatientRequestDto requestDto) {
+        Patient patient = new Patient();
+        patient.setUserName(requestDto.getUserName());
+        patient.setEmail(requestDto.getEmail());
+        patient.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+        patient.setAge(requestDto.getAge());
+        patient.setPhoneNumber(requestDto.getPhoneNumber());
+        patient.setCreation_date(LocalDate.now());
+        patient.setUpdate_date(new Date());
+
+        Role role = roleRepository.getByType(Type.valueOf(requestDto.getRole()));
+        patient.getRoles().add(role);
+        Patient saved = patientRepository.save(patient);
         return new PatientResponseDto(
                 saved.getUserId(),
                 saved.getUserName(),

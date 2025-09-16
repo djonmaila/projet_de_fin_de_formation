@@ -9,9 +9,11 @@ import com.formation.pharmacy_manager.repository.DistributorRepository;
 import com.formation.pharmacy_manager.repository.RoleRepository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +22,19 @@ import java.util.List;
 public class DistributorServiceImpl implements DistributorService {
     private DistributorRepository distributorRepository;
     private RoleRepository roleRepository;
+    private PasswordEncoder passwordEncoder;
     @Override
     public DistributorResponseDto create(DistributorRequestDto dto) {
-        Distributor distributor = dto.toDistributor(dto);
+        Distributor distributor = new Distributor();
+        distributor.setUserName(dto.getUserName());
+        distributor.setEmail(dto.getEmail());
+        distributor.setPhoneNumber(dto.getPhoneNumber());
+        distributor.setDistributorReference(dto.getDistributorReference());
+        distributor.setCreation_date(LocalDate.now());
+        distributor.setUpdate_date(new Date());
         Role role = roleRepository.getByType(Type.valueOf(dto.getRole()));
         distributor.getRoles().add(role);
+        distributor.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         Distributor dis = distributorRepository.save(distributor);
         return new DistributorResponseDto(

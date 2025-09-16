@@ -17,7 +17,11 @@ public class CategoryServiceImpl implements CategoryService{
     private CategoryRepository categoryRepository;
     @Override
     public CategoryResponseDto createCategory(CategoryRequestDto dto) {
-        Category category = dto.toCategoryEntityCreation(dto);
+        Category category = new Category();
+        category.setCategoryType(dto.getCategoryType());
+        category.setCategoryName(dto.getCategoryName());
+        category.setCreation_date(LocalDate.now());
+        category.setUpdate_date(LocalDate.now());
         Category cat = categoryRepository.save(category);
         return new CategoryResponseDto(
                 cat.getCategoryId(),
