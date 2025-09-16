@@ -14,35 +14,36 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtAuthenticationFilter extends OncePerRequestFilter { // Filtre qui s'exécute une seule fois par requête
 
-    private final JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil; // Outil pour gérer les tokens JWT
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+    public JwtAuthenticationFilter(JwtUtil jwtUtil) { // Constructeur pour injecter JwtUtil
         this.jwtUtil = jwtUtil;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+            throws ServletException, IOException { // Méthode exécutée pour filtrer chaque requête HTTP
 
-        String authHeader = request.getHeader("Authorization");
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String jwt = authHeader.substring(7);
-            if (jwtUtil.validateToken(jwt)) {
-                String username = jwtUtil.extractUsername(jwt);
-                List<String> roles = jwtUtil.extractRoles(jwt); // à implémenter dans jwtUtil
+        String authHeader = request.getHeader("Authorization"); // Récupère l'en-tête Authorization de la requête
+        if (authHeader != null && authHeader.startsWith("Bearer ")) { // Vérifie si l'en-tête commence par "Bearer "
+            String jwt = authHeader.substring(7); // Extrait le token en supprimant "Bearer "
+            if (jwtUtil.validateToken(jwt)) { // Vérifie si le token est valide
+                String username = jwtUtil.extractUsername(jwt); // Extrait le nom d'utilisateur du token
+                List<String> roles = jwtUtil.extractRoles(jwt); // Extrait les rôles du token
 
-                List<SimpleGrantedAuthority> authorities = roles.stream()
-                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                List<SimpleGrantedAuthority> authorities = roles.stream() // Transforme les rôles en autorités Spring
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role)) // Préfixe les rôles avec "ROLE_"
                         .toList();
                 UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(username, null, authorities);
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        new UsernamePasswordAuthenticationToken(username, null, authorities); // Crée un objet d'authentification avec l'utilisateur et ses rôles
 
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request)); // Ajoute des détails de la requête à l'objet d'authentification
+
+                SecurityContextHolder.getContext().setAuthentication(authentication); // Enregistre l'authentification dans le contexte de sécurité
             }
         }
-        chain.doFilter(request, response);
+        chain.doFilter(request, response); // Continue le traitement de la requête
     }
 }
