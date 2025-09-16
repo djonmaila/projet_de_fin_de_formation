@@ -13,3 +13,4 @@ public class CategoryRequestDto {
 
     private String categoryName;
 }
+
