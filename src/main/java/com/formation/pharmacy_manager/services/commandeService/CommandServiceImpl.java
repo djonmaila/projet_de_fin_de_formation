@@ -19,7 +19,8 @@ public class CommandServiceImpl implements CommandService{
     private UserRepository userRepository;
     @Override
     public CommandeResponseDto createCommande(CommandeRequestDto dto) {
-        Command command = dto.toCommandEntity(dto);
+        Command command =new Command();
+        command.setPseudo(dto.getPseudo());
         User user = userRepository.findDistinctByUserName(dto.getUserName());
         command.setUser(user);
         command.setCreation_date(new Date());

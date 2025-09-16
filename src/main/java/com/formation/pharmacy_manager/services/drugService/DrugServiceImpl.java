@@ -20,7 +20,13 @@ public class DrugServiceImpl implements DrugService{
     private CategoryRepository categoryRepository;
     @Override
     public DrugResponseDto createDrug(DrugRequestDto dto) {
-        Drug drug = dto.toDrugEntity(dto);
+        Drug drug = new Drug();
+        drug.setDrugName(dto.getDrugName());
+        drug.setDrugDescription(dto.getDrugDescription());
+        drug.setPeremption(dto.getPeremption());
+        drug.setPrice(dto.getPrice());
+        drug.setCreation_date(new Date());
+        drug.setUpdate_date(new Date());
         drug.setCategory(categoryRepository.findDistinctByCategoryType(dto.getType()));
 
         Drug dg = drugRepository.save(drug);
