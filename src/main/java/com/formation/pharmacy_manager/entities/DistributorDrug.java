@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@AllArgsConstructor
+@AllArgsConstructor 
 @NoArgsConstructor
 @Getter
 @Setter
