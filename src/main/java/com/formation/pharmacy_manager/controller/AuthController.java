@@ -4,8 +4,6 @@ import com.formation.pharmacy_manager.dto.userDto.UserConnectDto;
 import com.formation.pharmacy_manager.dto.userDto.UserConnectResponse;
 import com.formation.pharmacy_manager.security.JwtUtil;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
