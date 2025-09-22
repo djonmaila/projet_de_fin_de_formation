@@ -27,14 +27,9 @@ public class Drug {
 
     @NotBlank
     private String drugDescription;
-
     private LocalDate peremption;
-
     private double price;
-
-
     private Date creation_date;
-
     private Date update_date;
 
     @ManyToOne
