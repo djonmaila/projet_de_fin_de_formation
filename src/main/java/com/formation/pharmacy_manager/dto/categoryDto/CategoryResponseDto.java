@@ -16,4 +16,6 @@ public record CategoryResponseDto(
           category.getCategoryName()
         );
     }
+
+  
 }
