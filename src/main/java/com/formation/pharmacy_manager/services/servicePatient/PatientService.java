@@ -11,4 +11,5 @@ public interface PatientService {
     PatientResponseDto getPatientById(long id);
     String deleteById(long id);
     boolean existById(long id);
+    PatientResponseDto updatePatient(long id,PatientRequestDto dto);
 }
