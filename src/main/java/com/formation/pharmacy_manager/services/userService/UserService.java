@@ -1,7 +1,9 @@
 package com.formation.pharmacy_manager.services.userService;
 
 import com.formation.pharmacy_manager.dto.commandeDto.CommandeResponseDto;
+import com.formation.pharmacy_manager.dto.patientDto.PatientDay;
 import com.formation.pharmacy_manager.dto.roleDto.RoleResponseDto;
+import com.formation.pharmacy_manager.dto.userDto.CountStat;
 import com.formation.pharmacy_manager.dto.userDto.UserRoleRequestDto;
 import com.formation.pharmacy_manager.entities.Command;
 
@@ -13,4 +15,7 @@ public interface UserService {
     List<RoleResponseDto> getRolesForUser(String email);
     List<CommandeResponseDto> getCommandNotEmpty(String userName);
     List<CommandeResponseDto> getCommandEmpty(String userName);
+    CountStat getStat();
+    List<PatientDay> patientCreatedParDay();
+    long patientCreatedDay();
 }

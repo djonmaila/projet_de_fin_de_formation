@@ -2,6 +2,7 @@ package com.formation.pharmacy_manager.services.servicePatient;
 
 import com.formation.pharmacy_manager.dto.patientDto.PatientRequestDto;
 import com.formation.pharmacy_manager.dto.patientDto.PatientResponseDto;
+import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.Patient;
 import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.enumEntities.Type;
@@ -83,5 +84,26 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public boolean existById(long id) {
         return patientRepository.existsById(id);
+    }
+
+    @Override
+    public PatientResponseDto updatePatient(long id, PatientRequestDto requestDto) {
+        Patient patient = patientRepository.findById(id).get();
+        if (patient ==null) throw new RuntimeException("updating impossible because this user doesn't exist");
+        patient.setUserName(requestDto.getUserName());
+        patient.setEmail(requestDto.getEmail());
+        patient.setPassword(passwordEncoder.encode(requestDto.getPassword()));
+        patient.setAge(requestDto.getAge());
+        patient.setPhoneNumber(requestDto.getPhoneNumber());
+        patient.setUpdate_date(new Date());
+
+        Patient pa = patientRepository.save(patient);
+        return new PatientResponseDto(
+                pa.getUserId(),
+                pa.getUserName(),
+                pa.getPhoneNumber(),
+                pa.getEmail(),
+                pa.getAge()
+        );
     }
 }

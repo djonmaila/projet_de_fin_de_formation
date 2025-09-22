@@ -5,10 +5,12 @@ import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
 import com.formation.pharmacy_manager.entities.Command;
 import com.formation.pharmacy_manager.entities.User;
 import com.formation.pharmacy_manager.repository.CommandRepository;
+import com.formation.pharmacy_manager.repository.PatientRepository;
 import com.formation.pharmacy_manager.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,21 +19,26 @@ import java.util.List;
 public class CommandServiceImpl implements CommandService{
     private CommandRepository commandRepository;
     private UserRepository userRepository;
+    private PatientRepository patientRepository;
     @Override
     public CommandeResponseDto createCommande(CommandeRequestDto dto) {
-        Command command =new Command();
-        command.setPseudo(dto.getPseudo());
-        User user = userRepository.findDistinctByUserName(dto.getUserName());
-        command.setUser(user);
-        command.setCreation_date(new Date());
+        if (verifyIfCommandNotEmpty(dto.getUserName())) {
+            Command command = new Command();
+            command.setPseudo(dto.getPseudo());
+            User user = userRepository.findDistinctByUserName(dto.getUserName());
+            command.setUser(user);
+            command.setCreation_date(LocalDate.now());
 
-        Command cmd = commandRepository.save(command);
-        return new CommandeResponseDto(
-                cmd.getCommandId(),
-                cmd.getPseudo(),
-                cmd.getUser().getUserName(),
-                cmd.getCreation_date()
-        );
+            Command cmd = commandRepository.save(command);
+            return new CommandeResponseDto(
+                    cmd.getCommandId(),
+                    cmd.getPseudo(),
+                    cmd.getUser().getUserName(),
+                    cmd.getCreation_date()
+            );
+        }
+
+        throw new RuntimeException("command empty existing any");
     }
 
     @Override
@@ -74,8 +81,18 @@ public class CommandServiceImpl implements CommandService{
     }
 
     @Override
+    public List<CommandDate> totalCommandPerDateForUser(String userName) {
+        return commandRepository.totalCommandPassPerDateForUser(userName);
+    }
+
+    @Override
     public List<TotalMoneyPerCommand> totalRevenuCommand() {
         return commandRepository.totalRevenuCommand();
+    }
+
+    @Override
+    public List<TotalMoneyPerCommand> totalRevenuCommandForUser(String user) {
+        return commandRepository.totalRevenuCommandForUser(user);
     }
 
     @Override
@@ -84,8 +101,25 @@ public class CommandServiceImpl implements CommandService{
     }
 
     @Override
+    public List<TotalQuantityForDrugCommand> totalQuantityDrugInCommandDrugForUser(String user) {
+        return commandRepository.totalQuantityDrugInCommandDrugForUser(user);
+    }
+
+    @Override
     public long totalQteDrugHavingCommand(String pseudo) {
         return commandRepository.totalQteDrugHavingCommand(pseudo);
+    }
+
+    @Override
+    public List<CommandeResponseDto> getListCommandInThisDay(String userName) {
+        return commandRepository.getListCommandInThisDay(userName).stream().map(
+                cmd->new CommandeResponseDto(
+                        cmd.getCommandId(),
+                        cmd.getPseudo(),
+                        cmd.getUser().getUserName(),
+                        cmd.getCreation_date()
+                )
+        ).toList();
     }
 
     public boolean existById(long id){
@@ -98,7 +132,7 @@ public class CommandServiceImpl implements CommandService{
         command.setPseudo(dto.getPseudo());
         User user = userRepository.findDistinctByUserName(dto.getUserName());
         command.setUser(user);
-        command.setCreation_date(new Date());
+        command.setCreation_date(LocalDate.now());
 
         Command cmd = commandRepository.save(command);
         return new CommandeResponseDto(
@@ -107,5 +141,14 @@ public class CommandServiceImpl implements CommandService{
                 cmd.getUser().getUserName(),
                 cmd.getCreation_date()
         );
+    }
+
+    @Override
+    public boolean verifyIfCommandNotEmpty(String userName) {
+        List<Command> cmdListEmpty = userRepository.getCommandEmpty(userName);
+        if (!cmdListEmpty.isEmpty()){
+            return true;
+        }
+        return false;
     }
 }

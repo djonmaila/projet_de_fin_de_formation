@@ -1,7 +1,9 @@
 package com.formation.pharmacy_manager.controller;
 
 import com.formation.pharmacy_manager.dto.commandeDto.CommandeResponseDto;
+import com.formation.pharmacy_manager.dto.patientDto.PatientDay;
 import com.formation.pharmacy_manager.dto.roleDto.RoleResponseDto;
+import com.formation.pharmacy_manager.dto.userDto.CountStat;
 import com.formation.pharmacy_manager.dto.userDto.UserRoleRequestDto;
 import com.formation.pharmacy_manager.services.userService.UserService;
 import lombok.AllArgsConstructor;
@@ -42,5 +44,20 @@ public class UserController {
     @GetMapping("/listCommandEmpty/{userName}")
     public ResponseEntity<List<CommandeResponseDto>> getCommandEmpty(@PathVariable String userName){
         return new ResponseEntity<>(userService.getCommandEmpty(userName),HttpStatus.OK);
+    }
+
+    @GetMapping("/countStat")
+    public ResponseEntity<CountStat> getStat(){
+        return new ResponseEntity<>(userService.getStat(),HttpStatus.OK);
+    }
+
+    @GetMapping("/countPatientCreated")
+    public ResponseEntity<List<PatientDay>> countPatientDay(){
+        return new ResponseEntity<>(userService.patientCreatedParDay(),HttpStatus.OK);
+    }
+
+    @GetMapping("/newPatientCreated")
+    public ResponseEntity<Long> countPatientCurrentDay(){
+        return new ResponseEntity<>(userService.patientCreatedDay(),HttpStatus.OK);
     }
 }

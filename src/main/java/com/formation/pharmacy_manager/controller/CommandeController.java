@@ -46,9 +46,18 @@ public class CommandeController {
         return new ResponseEntity<>(commandService.totalCommandPerDate(), HttpStatus.OK);
     }
 
+    @GetMapping("/commandDate/{userName}")
+    public ResponseEntity<List<CommandDate>> getTotalCommandPassPerDate(@PathVariable String userName) {
+        return new ResponseEntity<>(commandService.totalCommandPerDateForUser(userName), HttpStatus.OK);
+    }
+
     @GetMapping("/TotalMoneyParCommand")
     public ResponseEntity<List<TotalMoneyPerCommand>> totalRevenuCommand() {
         return new ResponseEntity<>(commandService.totalRevenuCommand(), HttpStatus.OK);
+    }
+    @GetMapping("/TotalMoneyParCommand/{userName}")
+    public ResponseEntity<List<TotalMoneyPerCommand>> totalRevenuCommand(@PathVariable String userName) {
+        return new ResponseEntity<>(commandService.totalRevenuCommandForUser(userName), HttpStatus.OK);
     }
 
     @GetMapping("/TotalQuantityDrugInCommand")
@@ -56,8 +65,18 @@ public class CommandeController {
         return new ResponseEntity<>(commandService.totalQuantityDrugInCommandDrug(), HttpStatus.OK);
     }
 
+    @GetMapping("/TotalQuantityDrugInCommand/{userName}")
+    public ResponseEntity<List<TotalQuantityForDrugCommand>> totalQuantityDrugInCommandDrug(@PathVariable String userName) {
+        return new ResponseEntity<>(commandService.totalQuantityDrugInCommandDrugForUser(userName), HttpStatus.OK);
+    }
+
     @GetMapping("/totalDrudHavingCommand/{pseudo}")
     public ResponseEntity<Long> totalDrudHavingCommand(@PathVariable String pseudo){
         return new ResponseEntity<>(commandService.totalQteDrugHavingCommand(pseudo),HttpStatus.OK);
+    }
+
+    @GetMapping("/commanDay/{userName}")
+    public ResponseEntity<List<CommandeResponseDto>> getCommandDayforUser(@PathVariable String userName){
+        return new ResponseEntity<>(commandService.getListCommandInThisDay(userName),HttpStatus.OK);
     }
 }

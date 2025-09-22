@@ -25,8 +25,7 @@ public class Command {
     @NotNull
     private String pseudo;
 
-    @NotNull
-    private Date creation_date;
+    private LocalDate creation_date;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
