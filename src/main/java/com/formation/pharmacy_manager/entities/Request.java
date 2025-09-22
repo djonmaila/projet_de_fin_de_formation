@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -19,6 +21,8 @@ public class Request {
  
     @NotBlank
     private String requestName;
+
+    private LocalDate date;
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;

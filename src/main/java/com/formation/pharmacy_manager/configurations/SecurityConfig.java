@@ -48,9 +48,16 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .requestMatchers("/api/distributor/**").hasAnyRole("DISTRIBUTOR","ADMIN")
+                        .requestMatchers("/api/distributor/**","/api/category/","/api/drug/").hasAnyRole("DISTRIBUTOR","ADMIN")
                         .requestMatchers("/api/command/**").hasAnyRole("PATIENT","ADMIN")
                         .requestMatchers("/api/patient/**").hasAnyRole("PATIENT","ADMIN")
+                        .requestMatchers("/api/pharmacist/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/category/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/drugLine/**").hasAnyRole("ADMIN","DISTRIBUTOR")
+                        .requestMatchers("/api/role/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/roleServiceUser/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/drug/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/api/commandDrug/**").hasAnyRole("ADMIN","PATIENT")
                         .anyRequest().authenticated() // toutes les autres requêtes nécessitent un token valide
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
