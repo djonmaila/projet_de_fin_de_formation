@@ -24,7 +24,7 @@ public class CommandServiceImpl implements CommandService{
     public CommandeResponseDto createCommande(CommandeRequestDto dto) {
         if (verifyIfCommandNotEmpty(dto.getUserName())) {
             Command command = new Command();
-            command.setPseudo(dto.getPseudo());
+            command.setPseudo(String.format("cmd%06d", commandRepository.count()+1));
             User user = userRepository.findDistinctByUserName(dto.getUserName());
             command.setUser(user);
             command.setCreation_date(LocalDate.now());
@@ -129,7 +129,6 @@ public class CommandServiceImpl implements CommandService{
     public CommandeResponseDto updateCommande(long id,CommandeRequestDto dto) {
         Command command =commandRepository.findById(id).orElse(null);
         if (command == null) throw new RuntimeException("impossible to update this command");
-        command.setPseudo(dto.getPseudo());
         User user = userRepository.findDistinctByUserName(dto.getUserName());
         command.setUser(user);
         command.setCreation_date(LocalDate.now());
