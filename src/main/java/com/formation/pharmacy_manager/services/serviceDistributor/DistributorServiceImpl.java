@@ -1,5 +1,4 @@
 package com.formation.pharmacy_manager.services.serviceDistributor;
-
 import com.formation.pharmacy_manager.dto.distributorDto.DistributorRequestDto;
 import com.formation.pharmacy_manager.dto.distributorDto.DistributorResponseDto;
 import com.formation.pharmacy_manager.dto.drugDto.DrugResponseDto;
@@ -8,8 +7,10 @@ import com.formation.pharmacy_manager.entities.Role;
 import com.formation.pharmacy_manager.enumEntities.Type;
 import com.formation.pharmacy_manager.repository.DistributorRepository;
 import com.formation.pharmacy_manager.repository.RoleRepository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
