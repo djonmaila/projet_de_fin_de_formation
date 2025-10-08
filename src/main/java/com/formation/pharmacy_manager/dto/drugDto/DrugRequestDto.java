@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @AllArgsConstructor
 public class DrugRequestDto {
-    private String drugName;
+    private String  drugName;
     private String drugDescription;
     private LocalDate peremption;
     private double price;
